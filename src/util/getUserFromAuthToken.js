@@ -19,22 +19,23 @@ import expandAuthToken from "./expandAuthToken.js";
 async function getUserFromAuthToken(loginToken, context) {
   const token = loginToken.replace(/bearer\s/gi, "");
 
-  const tokenObj = await expandAuthToken(token);
-  if (!tokenObj) {
-    Logger.debug("No token object");
-    throw new Error("No token object");
+  const strapiUser = await expandAuthToken(token);
+  console.log(JSON.stringify(strapiUser));
+  if (!strapiUser) {
+    Logger.debug("No stapi user found");
+    throw new Error("No stapi user found");
   }
 
-  const { active, sub: _id, token_type: tokenType } = tokenObj;
+  const { confirmed, blocked , ecommerce_id: _id } = strapiUser;
 
-  if (!active) {
-    Logger.debug("Bearer token is expired");
-    throw new Error("Bearer token is expired");
+  if (!confirmed) {
+    Logger.debug("Stapi user not confirmed yet");
+    throw new Error("Stapi user not confirmed yet");
   }
 
-  if (tokenType !== "access_token") {
-    Logger.error("Bearer token is not an access token");
-    throw new Error("Bearer token is not an access token");
+  if (blocked) {
+    Logger.error("Stapi user is blocked");
+    throw new Error("Stapi user is blocked");
   }
 
   const currentUser = await context.collections.users.findOne({ _id });

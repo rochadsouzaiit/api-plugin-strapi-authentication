@@ -1,7 +1,7 @@
 import fetch from "node-fetch";
 import config from "../config.js";
 
-const { HYDRA_OAUTH2_INTROSPECT_URL } = config;
+const { STRAPI_OAUTH2_INTROSPECT_URL } = config;
 
 /**
  * Given an Authorization Bearer token it returns a JSON object with user
@@ -14,13 +14,12 @@ const { HYDRA_OAUTH2_INTROSPECT_URL } = config;
  * @returns {Object} JSON object
  */
 export default async function expandAuthToken(token) {
-  const response = await fetch(HYDRA_OAUTH2_INTROSPECT_URL, {
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    method: "POST",
-    body: `token=${encodeURIComponent(token)}`
+  const response = await fetch(STRAPI_OAUTH2_INTROSPECT_URL, {
+    headers: { "Authorization": `Bearer ${encodeURIComponent(token)}` },
+    method: "GET"
   });
-
+  
   if (!response.ok) throw new Error("Error introspecting token");
-
+  
   return response.json();
 }
