@@ -20,7 +20,6 @@ async function getUserFromAuthToken(loginToken, context) {
   const token = loginToken.replace(/bearer\s/gi, "");
 
   const strapiUser = await expandAuthToken(token);
-  console.log(JSON.stringify(strapiUser));
   if (!strapiUser) {
     Logger.debug("No stapi user found");
     throw new Error("No stapi user found");

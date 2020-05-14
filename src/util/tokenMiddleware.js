@@ -19,7 +19,6 @@ import getUserFromAuthToken from "./getUserFromAuthToken.js";
  */
 export default function tokenMiddleware(context) {
   return async (req, res, next) => {
-    console.log('**** USING STRAPI AUTHENTICATION PLUGIN ****')
     const token = req.headers.authorization;
     if (!token) {
       next();
