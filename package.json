@@ -1,27 +1,27 @@
 {
-  "name": "@reactioncommerce/api-plugin-authentication",
-  "description": "Authentication plugin for the Reaction API",
-  "version": "0.0.0-development",
+  "name": "@reactioncommerce/api-plugin-strapi-authentication",
+  "description": "Strapi Authentication plugin for the Reaction API",
+  "version": "1.1.0-strapi",
   "main": "index.js",
   "type": "module",
   "engines": {
     "node": ">=12.14.1"
   },
-  "homepage": "https://github.com/reactioncommerce/api-plugin-authentication",
-  "url": "https://github.com/reactioncommerce/api-plugin-authentication",
-  "email": "engineering@reactioncommerce.com",
+  "homepage": "https://gitlab.com/proxim-city/webserver/e-commerce/api-plugin-strapi-authentication",
+  "url": "https://gitlab.com/proxim-city/webserver/e-commerce/api-plugin-strapi-authentication",
+  "email": "info@inflightit.com",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/reactioncommerce/api-plugin-authentication.git"
+    "url": "git+https://gitlab+deploy-token-172774:mdG839hJqAq8VkSLjznV@gitlab.com/proxim-city/webserver/e-commerce/api-plugin-strapi-authentication.git"
   },
   "author": {
-    "name": "Reaction Commerce",
-    "email": "engineering@reactioncommerce.com",
-    "url": "https://reactioncommerce.com"
+    "name": "InflightIt",
+    "email": "info@inflightit.com",
+    "url": "https://inflightit.pt"
   },
   "license": "Apache-2.0",
   "bugs": {
-    "url": "https://github.com/reactioncommerce/api-plugin-authentication/issues"
+    "url": "https://gitlab.com/proxim-city/webserver/e-commerce/api-plugin-strapi-authentication/-/issues"
   },
   "sideEffects": false,
   "dependencies": {
