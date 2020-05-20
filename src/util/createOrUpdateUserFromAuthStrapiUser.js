@@ -37,11 +37,11 @@ async function createOrUpdateUserFromAuthStrapiUser(strapiUser, context) {
     }]
   }
   let eCommerceUser = null;
-  if (!!existsUser) { 
+  if (!!existsUser) {
     // Update the e-commerce user
-    eCommerceUser = await context.collections.users.update({_id: existsUser._id}, values);
+    eCommerceUser = await context.collections.users.updateOne({_id: existsUser._id}, {$set: values});
   } else {
-    // Create a new e-commerce User 
+    // Create a new e-commerce User
     values._id = ObjectId().toString();
     eCommerceUser = await context.collections.users.insertOne(values, {forceServerObjectId: true});
   }
