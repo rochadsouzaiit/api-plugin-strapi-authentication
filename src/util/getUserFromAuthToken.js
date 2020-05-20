@@ -1,6 +1,6 @@
 import Logger from "@reactioncommerce/logger";
 import expandAuthToken from "./expandAuthToken.js";
-const {ObjectId} = require('mongodb');
+import createOrUpdateUserFromAuthStrapiUser from "./createOrUpdateUserFromAuthStrapiUser.js";
 /**
  * Given an Authorization Bearer token and the current context, returns the user document
  * for that token after performing token checks.
@@ -38,7 +38,7 @@ async function getUserFromAuthToken(loginToken, context) {
     throw new Error("Stapi user is blocked");
   }
 
-  const currentUser = await context.collections.users.findOne({ _id: ObjectId(_id) });
+  const currentUser = await createOrUpdateUserFromAuthStrapiUser(user, context);
   if (!currentUser) {
     Logger.error("Bearer token specifies a user ID that does not exist");
     throw new Error("Bearer token specifies a user ID that does not exist");
