@@ -19,13 +19,14 @@ import expandAuthToken from "./expandAuthToken.js";
 async function getUserFromAuthToken(loginToken, context) {
   const token = loginToken.replace(/bearer\s/gi, "");
 
-  const strapiUser = await expandAuthToken(token);
-  if (!strapiUser) {
+  const user = await expandAuthToken(token);
+  
+  if (!user) {
     Logger.debug("No stapi user found");
     throw new Error("No stapi user found");
   }
 
-  const { confirmed, blocked , ecommerce_id: _id } = strapiUser;
+  const { confirmed, blocked , _id } = user;
 
   if (!confirmed) {
     Logger.debug("Stapi user not confirmed yet");
