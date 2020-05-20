@@ -1,4 +1,6 @@
 import Logger from "@reactioncommerce/logger";
+import mongodb from "mongodb";
+const { ObjectId } = mongodb;
 /**
  * Given an Authorization Bearer token and the current context, returns the user document
  * for that token after performing token checks.
@@ -23,7 +25,6 @@ async function createOrUpdateUserFromAuthStrapiUser(strapiUser, context) {
 
   const existsUser = await context.collections.users.findOne({strapi_user: id });
   const values = {
-    _id: id,
     strapi_user: id,
     confirmed,
     blocked,
@@ -41,7 +42,8 @@ async function createOrUpdateUserFromAuthStrapiUser(strapiUser, context) {
     eCommerceUser = await context.collections.users.update({_id: existsUser._id}, values);
   } else {
     // Create a new e-commerce User 
-    eCommerceUser = await context.collections.users.create(values);
+    values._id = ObjectId().toString();
+    eCommerceUser = await context.collections.users.insertOne(values, {forceServerObjectId: true});
   }
   return eCommerceUser;
 }
